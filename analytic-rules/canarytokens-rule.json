@@ -1,0 +1,101 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceName": {
+            "type": "String"
+        },
+	"ruleId": {
+      "type": "string",
+      "defaultValue": "[newGuid()]",
+      "metadata": {
+        "description": "The unique guid for this Analytics Rule"
+				}
+        },
+    "domain": {
+        "type": "string",
+        "defaultValue": "<Enter your canary platform domain here>",
+        "metadata": {
+            "description": "The domain name for the canary platform, to be provided by WASOC"
+            }
+        }
+		},	
+    "resources": [
+        {
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId'))]",
+            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId'))]",
+            "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
+            "kind": "Scheduled",
+            "apiVersion": "2023-12-01-preview",
+            "properties": {
+                "displayName": "[WASOC][CANARY-TOKEN] A canary token has been triggered",
+                "description": "A canary token has been triggered, please refer to organisation playbook to investigate the alert.",
+                "severity": "High",
+                "enabled": true,
+                "query": "let ingestion_delay = 1m;\nlet rule_look_back = 5m;\nCanaryLogs_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType_s == \"CanarytokenIncident\"\n| extend IncidentHash_g_ = replace_string(IncidentHash_g,\"-\",\"\") //standardize to Canary URL structure",
+                "queryFrequency": "PT5M",
+                "queryPeriod": "PT10M",
+                "triggerOperator": "GreaterThan",
+                "triggerThreshold": 0,
+                "suppressionDuration": "PT5H",
+                "suppressionEnabled": false,
+                "startTimeUtc": null,
+                "tactics": [],
+                "techniques": [],
+                "subTechniques": [],
+                "alertRuleTemplateName": null,
+                "incidentConfiguration": {
+                    "createIncident": true,
+                    "groupingConfiguration": {
+                        "enabled": true,
+                        "reopenClosedIncident": false,
+                        "lookbackDuration": "PT30M",
+                        "matchingMethod": "Selected",
+                        "groupByEntities": [
+                            "IP",
+                            "File"
+                        ],
+                        "groupByAlertDetails": [
+                            "DisplayName"
+                        ],
+                        "groupByCustomDetails": []
+                    }
+                },
+                "eventGroupingSettings": {
+                    "aggregationKind": "AlertPerResult"
+                },
+                "alertDetailsOverride": {
+                    "alertDisplayNameFormat": "[WASOC][CANARY-TOKEN] Canary token alert - {{Description_s}} ",
+                    "alertDescriptionFormat": "[concat('{{Intro_s}} \n<br>\n\nReminder: {{Reminder_s}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_g_}}')]",
+                    "alertDynamicProperties": []
+                },
+                "customDetails": {
+                    "Type": "AlertType_s",
+                    "SubType": "Description_s"
+                },
+                "entityMappings": [
+                    {
+                        "entityType": "IP",
+                        "fieldMappings": [
+                            {
+                                "identifier": "Address",
+                                "columnName": "SourceIP"
+                            }
+                        ]
+                    },
+                    {
+                        "entityType": "File",
+                        "fieldMappings": [
+                            {
+                                "identifier": "Name",
+                                "columnName": "Token_s"
+                            }
+                        ]
+                    }
+                ],
+                "sentinelEntitiesMappings": null,
+                "templateVersion": null
+            }
+        }
+    ]
+}

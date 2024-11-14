@@ -7,10 +7,6 @@ This folder contains analytic-rules to generate alerts and incident in agency's 
 - You must have set up [send-canary-alert-webhook](./send-canary-alert-webhook/README.md) logic-apps prior to deploying the analytic rules
 - The analytic rule uses the following default table name: **CanaryLogs_CL**
 
-## Quick Deployment
-
-![Deploy to Azure](https://aka.ms/deploytoazurebutton)
-
 ## Step by step guide
 
 ### Step 1.

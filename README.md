@@ -4,9 +4,9 @@ This site contains technical information to onboard to WA HoneyTraps program.
 
 ## Table of Contents
 
-1) [Onboarding Process (technical)](#onboarding-process-technical)
+1) [Onboarding Checklist](#onboarding-checklist)
 
-2) [Azure LogicApp Deployment Guide](#azure-logicapp-deployment-guide)
+2) [Azure Logic App Deployment Guide](#azure-logic-app-deployment-guide)
 
 3) [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
 
@@ -14,14 +14,14 @@ This site contains technical information to onboard to WA HoneyTraps program.
 
 ---
 
-## Onboarding Process (Technical)
+## Onboarding Checklist
 
-1. Raise a ticket in <https://irp.dpc.wa.gov.au> to get onboard WA Honeytraps Program.
-2. Verify that a Canary group has been provisioned for agency by WA SOC.
-3. Deploy integration webhook logic-apps [Azure LogicApp Deployment Guide](#azure-logicapp-deployment-guide)
-4. Deploy analytic rules for Microsoft Sentinel [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
-5. Ensure analytic rules and logic-apps were enabled
-6. Initiate end-to-end test to generate alert
+- [ ] Refer to information and instructions provided in [WASOC Honey Trap (Pilot)](https://soc.cyber.wa.gov.au//onboarding/honey-traps/) get onboard to WA Honeytraps Program.
+- [ ] Verify that a Canary group has been provisioned for agency by WA SOC.
+- [ ] Deploy integration webhook logic-apps [Azure Logic App Deployment Guide](#azure-logic-app-deployment-guide)
+- [ ] Deploy analytic rules for Microsoft Sentinel [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
+- [ ] Ensure analytic rules and Logic Apps have been enabled
+- [ ] Initiate end-to-end test to generate alert
 
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
@@ -29,8 +29,8 @@ For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 
 ---
 
-<!-- BEGINNING: Azure LogicApp Deployment Guide -->
-# Azure LogicApp Deployment Guide
+<!-- BEGINNING: Azure Logic App Deployment Guide -->
+# Azure Logic App Deployment Guide
 
 The following steps will guide you on utilising Azure ARM templates to deploy logic-app resource(s) to send canary alerts from the canary platform to the agency's Sentinel workspace.
 
@@ -110,7 +110,7 @@ Field description:
 
 This completes the integration of your Canary platform with your SIEM environment.
 
-<!-- END: Azure LogicApp Deployment Guide -->
+<!-- END: Azure Logic App Deployment Guide -->
 ---
 <!-- BEGINNING: Analytic Rules Deployment Guide -->
 # Analytic Rules Deployment Guide
@@ -119,7 +119,7 @@ The following steps will guide you on deploying analytic-rules to generate alert
 
 ## Prerequisites
 
-- You must have set up [send-canary-alert-webhook](#azure-logicapp-deployment-guide) logic-apps prior to deploying the analytic rules
+- You must have set up [send-canary-alert-webhook](#azure-logic-app-deployment-guide) logic-apps prior to deploying the analytic rules
 - The analytic rule uses the following default table name: **CanaryLogs_CL**
 
 ## Step by step guide

@@ -21,7 +21,7 @@ This site contains technical information to onboard to WA HoneyTraps program.
 - [ ] Deploy integration webhook logic-apps [Azure Logic App Deployment Guide](#azure-logic-app-deployment-guide)
 - [ ] Deploy analytic rules for Microsoft Sentinel [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
 - [ ] Ensure analytic rules and Logic Apps have been enabled
-- [ ] Initiate end-to-end test to generate alert
+- [ ] [Initiate end-to-end test to generate alert](#end-to-end-testing)
 
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
@@ -162,6 +162,24 @@ Navigate to _Analytics_ blade inside the Microsoft Sentinel, and verify that the
 Initiate test to generate incident from the canary platform, and verify that incidents were generated in Microsoft Sentinel.
 <!-- END: Analytic Rules Guide -->
 
+## End-to-end testing
+To initiate an end-to-end test the integration of the canary platform and the SIEM, you could do the following.
+
+### Pre-requisites
+- You must have a canary group provisioned by WA SOC.
+- You must have completed the [Azure Logic App Deployment](#azure-logic-app-deployment-guide) and have [Analytic Rules Deployed](#analytic-rules-deployment-guide).
+
+### Step 1. 
+Create a new canary token within your canary group.
+
+### Step 2. 
+Trigger the canary token by interacting with it.
+
+### Step 3. 
+Navigate to your Log Analytics Workspace to check if any alerts have been ingested.
+> It may take up to 5 minutes for the alerts to ingest
+
+If you have alerts being ingested into your Log Analytics Workspace, you have successfully completed your canary platform and SIEM integration. 
 
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au

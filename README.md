@@ -10,7 +10,9 @@ This site contains technical information to onboard to WA HoneyTraps program.
 
 3) [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
 
-3) [Feedback](#feedback-1)
+4) [Initiating an end-to-end test](#initiating-an-end-to-end-test)
+
+5) [Feedback](#feedback-1)
 
 ---
 
@@ -162,7 +164,7 @@ Navigate to _Analytics_ blade inside the Microsoft Sentinel, and verify that the
 Initiate test to generate incident from the canary platform, and verify that incidents were generated in Microsoft Sentinel.
 <!-- END: Analytic Rules Guide -->
 
-## End-to-end testing
+## Initiating an end-to-end test
 To initiate an end-to-end test the integration of the canary platform and the SIEM, you could do the following.
 
 ### Pre-requisites

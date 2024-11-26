@@ -23,7 +23,7 @@ This site contains technical information to onboard to WA HoneyTraps program.
 - [ ] Deploy integration webhook logic-apps [Azure Logic App Deployment Guide](#azure-logic-app-deployment-guide)
 - [ ] Deploy analytic rules for Microsoft Sentinel [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
 - [ ] Ensure analytic rules and Logic Apps have been enabled
-- [ ] [Initiate end-to-end test to generate alert](#end-to-end-testing)
+- [ ] [Initiate end-to-end test to generate alert](#initiating-an-end-to-end-test)
 
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au

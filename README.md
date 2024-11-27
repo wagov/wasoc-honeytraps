@@ -46,7 +46,7 @@ The following steps will guide you on utilising Azure ARM templates to deploy lo
 ### Step 1. 
 To start the deployment of the logic app to Azure, click on the Deploy to 'Azure button' shown below.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)(https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fsend-canary-alert-webhook%2FDeploy-WASOC-Canary.json)]
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fsend-canary-alert-webhook%2FDeploy-WASOC-Canary.json)
 
 ### Step 2.
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information.
@@ -130,7 +130,7 @@ The following steps will guide you on deploying analytic-rules to generate alert
 
 To start the deployment of the Azure Analytic Rules, click on the 'Deploy to Azure' button shown below.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)(https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcombined-canary-rules.json)]
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcombined-canary-rules.json)
 
 ### Step 2.
 

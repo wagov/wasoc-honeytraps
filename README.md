@@ -128,9 +128,15 @@ The following steps will guide you on deploying analytic-rules to generate alert
 
 ### Step 1.
 
-To start the deployment of the Azure Analytic Rules, click on the 'Deploy to Azure' button shown below.
+To start the deployment of the Azure Analytic Rules for each type of canary, click on the 'Deploy to Azure' buttons shown below.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcombined-canary-rules.json)
+- **Canary Tokens - Analytic Rules**
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcanarytokens-rule.json)
+
+- **Canary - Analytic Rules**
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcanary-rule.json)
 
 ### Step 2.
 

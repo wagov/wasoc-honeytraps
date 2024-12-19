@@ -96,11 +96,14 @@ Capture the following information from your Logic App deployment for setting up 
 
 ![Screenshot of the Condition component of LA](./images/copy-value-from-la-condition-ss.png)
 
-The two pieces of information noted in the previous steps 5 and 6 will be required to complete the setup of the webhook on the Canary platform side, which will allow you to start ingesting the alerts from the Canary platform to your Log Analytics Workspace.
+<!-- The two pieces of information noted in the previous steps 5 and 6 will be required to complete the setup of the webhook on the Canary platform side, which will allow you to start ingesting the alerts from the Canary platform to your Log Analytics Workspace. -->
 
 ### Step 7.
 
-Navigate to your Canary platform's webhook settings and enter the two pieces of information we collected earlier as shown in the image below.
+Provide the two pieces of information collected in Step 5 and Step 6 to the WASOC team for completing the integration of the Canary platform with your Sentinel environment.
+1. *Webhook URL* from Step 5
+2. *GUID value* from Step 6
+<!-- Navigate to your Canary platform's webhook settings and enter the two pieces of information we collected earlier as shown in the image below.
 
 ![Screenshot of canary webhook setting](./images/canaryplatform-webhook-settings.png)
 
@@ -110,7 +113,7 @@ Field description:
 2. Provide a header name and paste the GUID value copied in step 6.
 3. Save the webhook information.
 
-This completes the integration of your Canary platform with your SIEM environment.
+This completes the integration of your Canary platform with your SIEM environment. -->
 
 <!-- END: Azure Logic App Deployment Guide -->
 ---

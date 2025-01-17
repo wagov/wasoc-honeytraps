@@ -150,7 +150,7 @@ Field description:
 1. **Subscription**: The subscriptions where the Sentinel workspace is located
 2. **Resource Group**: The resource group where the Sentinel workspace is located
 3. **Region**: The region where the Sentinel workspace is located
-4. **Workspace Name**: The _workspaceId_ of Sentinel log analytics workspace, where the analytic rule will be deployed to
+4. **Workspace Name**: The _workspaceName_ of Sentinel log analytics workspace, where the analytic rule will be deployed to
 5. **Rule Id**: Value to obtain a new Rule Id using the newGuid function in Azure
 6. **Domain**: The domain name for the canary platform, to be provided by WASOC.
 

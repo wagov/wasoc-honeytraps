@@ -21,8 +21,11 @@ This repository contains information on the WA Honey Traps Program onboarding pr
 <!-- ![Overview-HoneyTrapsIntegration](./images/overview-honey-traps-integration.png)) -->
 ## Platform Integration - Overview
 
-<img src="images/overview-honey-traps-integration.png" width="1000" height="300">
+<div align="left" class="container">
 
+<img src="images/overview-honey-traps-setup.png" width="900" height="700">
+
+</div>
 
 ## Onboarding Checklist
 

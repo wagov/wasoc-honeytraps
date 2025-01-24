@@ -40,10 +40,6 @@ For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 <!-- Empty line for styling -->
 </br>
 
-<div align="center">
-:---------------------------==================================================================================================================---------------------------:
-</div>
-
 <br>
 <!-- Empty line for styling -->
 </br>
@@ -146,9 +142,6 @@ This completes the integration of your Canary platform with your SIEM environmen
 <!-- Empty line for styling -->
 </br>
 
-<div align="center">
-:---------------------------==================================================================================================================---------------------------:
-</div>
 
 <br>
 <!-- Empty line for styling -->
@@ -240,9 +233,6 @@ For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 <!-- Empty line for styling -->
 </br>
 
-<div align="center">
-:---------------------------==================================================================================================================---------------------------:
-</div>
 
 <br>
 <!-- Empty line for styling -->

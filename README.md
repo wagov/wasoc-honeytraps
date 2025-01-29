@@ -62,7 +62,7 @@ The following steps will guide you on utilising Azure ARM templates to deploy lo
 
 ## Pre-requisites:
 - Requires an Azure Log Analytics Workspace (to ingest the data from Canary platform)
-- Required permissions to deploy the logic app and resources
+- Ensure you have permissions required to deploy the Azure Logic App ([Logic App Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/integration#logic-app-contributor)) and Analytic Rules ([Microsoft Sentinel Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#microsoft-sentinel-contributor))
 - A Canary group that has been provisioned by WASOC
 
 ## Step by step guide

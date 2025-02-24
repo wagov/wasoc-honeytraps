@@ -127,6 +127,12 @@ Capture the following information from your Logic App deployment for setting up 
 Provide the two pieces of information collected in Step 5 and Step 6 to the WASOC team for completing the integration of the Canary platform with your Sentinel environment.
 1. *Webhook URL* from Step 5
 2. *GUID value* from Step 6
+
+### Step 8. 
+
+Once the webhook has been setup successfully by the WASOC team, create a new test Canary Token and generate an incident by interacting with it.
+This should generate an alert and send its data to Sentinel via the Logic App we deployed.
+
 <!-- Navigate to your Canary platform's webhook settings and enter the two pieces of information we collected earlier as shown in the image below.
 
 ![Screenshot of canary webhook setting](./images/canaryplatform-webhook-settings.png)
@@ -164,7 +170,8 @@ The following steps will guide you on deploying analytic-rules to generate alert
 ## Prerequisites
 
 - You must have set up [send-canary-alert-webhook](#azure-logic-app-deployment-guide) logic-apps prior to deploying the analytic rules
-- The analytic rule uses the following default table name: **CanaryLogs_CL**
+- You must have atleast one Canary token incident generated on the Canary platform (Ref: [Step 8](#step-8) of Azure Logic App Deployment Guide)
+- The analytic rule uses the following default table name in your Log Analytics Workspace: **CanaryLogs_CL**
 
 ## Step by step guide
 

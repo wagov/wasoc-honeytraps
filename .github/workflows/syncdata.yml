@@ -1,0 +1,30 @@
+name: sync
+on: 
+  schedule: 
+    # Run action everyday at 00:01 AWST
+    - cron: '1 14 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Config DNS
+        run: |
+          echo "nameserver 8.8.8.8" > /tmp/resolv.conf
+          sudo mv /tmp/resolv.conf /etc/resolv.conf
+      - name: Instal dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests
+      - name: Run Python script
+        env: 
+          HONEY_TRAPS_SECRETS_RO: ${{secrets.HONEY_TRAPS_SECRETS_RO}}
+          HONEY_TRAPS_DOMAIN: ${{secrets.HONEY_TRAPS_DOMAIN}}
+          HONEY_TRAPS_LA_URL: ${{secrets.HONEY_TRAPS_LA_URL}}
+        run: python honey-passer.py

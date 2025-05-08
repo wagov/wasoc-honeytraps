@@ -27,4 +27,4 @@ jobs:
           HONEY_TRAPS_SECRETS_RO: ${{secrets.HONEY_TRAPS_SECRETS_RO}}
           HONEY_TRAPS_DOMAIN: ${{secrets.HONEY_TRAPS_DOMAIN}}
           HONEY_TRAPS_LA_URL: ${{secrets.HONEY_TRAPS_LA_URL}}
-        run: python honey-passer.py
+        run: python ./python_scripts/honey-passer.py

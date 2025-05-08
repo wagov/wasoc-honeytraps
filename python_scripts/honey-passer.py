@@ -4,7 +4,7 @@ import json
 
 
 ####                   <<<<< Secrets >>>                          ####
-secret = os.getenv("HONEY_TRAPS_SECRETS", default=None) # Grab the HoneyTraps API token from env secrets
+secret = os.getenv("HONEY_TRAPS_SECRETS_RO", default=None) # Grab the HoneyTraps API token from env secrets
 domain = os.getenv("HONEY_TRAPS_DOMAIN", default=None) # Get the HoneyTraps domain from the env secrets
 la_url = os.getenv("HONEY_TRAPS_LA_URL", default=None) # Get the HoneyTraps LogicApp URL from the env secrets
 #### ------------------------------------------------------------ ####
@@ -143,5 +143,6 @@ def send_data_la(data:dict) -> None:
     print(f"Failed to send data. Status Code {response.status_code}, Response {response.reason}")
 
 
-send_data_la(all_tenant_token_device_info(all_tenants_summary(),"array"))
+if __name__ == '__main__':
+  send_data_la(all_tenant_token_device_info(all_tenants_summary(),"array"))
 

@@ -2,7 +2,7 @@ name: sync
 on: 
   schedule: 
     # Run action everyday at 00:01 AWST
-    - cron: '1 14 * * *'
+    - cron: '1 16 * * *'
 
 jobs:
   build:

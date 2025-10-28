@@ -52,17 +52,17 @@ For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 
 ---
 
-<!-- BEGINNING: Azure Logic App Deployment Guide -->
+<!-- BEGINNING: Data Collection Rule and Custom Table creation ARM template deployment guide -->
 <div align="center">
 
-# Azure Logic App Deployment Guide
-The following steps will guide you on utilising Azure ARM templates to deploy logic-app resource(s) to send canary alerts from the canary platform to the agency's Sentinel workspace.
+# Data Collection Rule creation and Logic App deployment guide
+The following steps will guide you on utilising Azure ARM templates to create a Data Collection Rule and a custom table for the canary platform data.
 </div>
+
 
 
 ## Pre-requisites:
 - Requires an Azure Log Analytics Workspace (to ingest the data from Canary platform)
-- Ensure you have permissions required to deploy the Azure Logic App ([Logic App Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/integration#logic-app-contributor)) and Analytic Rules ([Microsoft Sentinel Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#microsoft-sentinel-contributor))
 - A Canary group that has been provisioned by WASOC
 
 ## Step by step guide
@@ -70,7 +70,7 @@ The following steps will guide you on utilising Azure ARM templates to deploy lo
 ### Step 1. 
 To start the deployment of the logic app to Azure, click on the Deploy to 'Azure button' shown below.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fsend-canary-alert-webhook%2FDeploy-WASOC-Canary.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/)
 
 ### Step 2.
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information.
@@ -78,15 +78,13 @@ You will be redirected to the custom deployment screen in azure portal. Select/ 
 ![Screenshot of the Custom Deployment page](./images/custom-deployment-page-ss.png)
 
 Field description:
-1. **Subscription**: The subscriptions where the Logic apps will be deployed to
-2. **Resource Group**: The resource group where the Logic apps will be deployed to
-3. **Log Analytics Workspace ID**: The _workspaceId_ of Sentinel log analytics workspace, where the canary/ canary-token logs will be send to
-4. **Log Analytics Workspace Key**: The _primary key_ of the agent for Sentinel log analytics workspace, where the canary/ canary-token will be send to
+1. **Subscription**: The subscriptions where the Data Collection Rules will be deployed to.
+2. **Resource Group**: The resource group where the Data Collection Rules will be deployed to.
+3. **Data Collection Rule Name**: Name for the Data Collection Rule (Note: No special characters or numbers).
+4. **Workspace Resource ID**: The Workspace Resource ID of the log analytics workspace, where the canary/ canary-token logs will be send to.
+5. **Workspace Name**: The name of the Workspace you have selected above.
 
-> Note: Do not replace or change the value in the 'Unique Key' field as this will be used to generate a unique key for the webhook header.
-
-Reference: 
-- [Where is azure workspace Id and primary key](https://learn.microsoft.com/en-us/answers/questions/1154380/where-is-azure-is-the-primary-key-and-workspace-id)
+> Note: Workspace Resource ID can be found under the settings of the workspace in Sentinel.
 
 
 ### Step 3.
@@ -95,57 +93,21 @@ Review and ensure all details provided in the deployment are correct and proceed
 ![Screenshot of Review and Create page](./images/review-and-create-page-ss.png)
 
 ### Step 4.
-Navigate to your resource group from the deployment details page, and select your deployed Logic App (containing the name that you provided in the Step 2).
+Click on the Data Collection Rule resource that was just deployed and in the overview of the DCR, select JSON View on the top right hand corner. 
 
-![Screenshot of Go to Resource Group Page](./images/goto-resource-group-page-ss.png)
-
-Your deployed Logic App under the Logic App designer, should look similar to the image shown below.
-
-![Screenshot of the deployed Logic App](./images/deployed-logic-app-ss.png)
+### Step 5. 
+Now select the 'Deploy to Azure' to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace and fill in the following information.
 
 
-Capture the following information from your Logic App deployment for setting up a webhook with the Canary platform.
-
-### Step 5.
-
-1. Select the 'manual' action on the Logic App.
-2. Copy/note down the value under the '**HTTP URL**' section, as shown below.
-
-![Screenshot of the webhook URL](./images/webhook-url-la-ss.png)
-
-### Step 6.
-
-1. Select the 'Condition' action from the Logic App.
-2. Copy/note down the '**key**' value in the right side of the 'is equal to' condition. (***This is a GUID that is unique to you and will be used in setting up the webhook with the Canary platform***)
-
-![Screenshot of the Condition component of LA](./images/copy-value-from-la-condition-ss.png)
-
-<!-- The two pieces of information noted in the previous steps 5 and 6 will be required to complete the setup of the webhook on the Canary platform side, which will allow you to start ingesting the alerts from the Canary platform to your Log Analytics Workspace. -->
-
-### Step 7.
-
-Provide the two pieces of information collected in Step 5 and Step 6 to the WASOC team for completing the integration of the Canary platform with your Sentinel environment.
-1. *Webhook URL* from Step 5
-2. *GUID value* from Step 6
-
-### Step 8. 
-
-Once the webhook has been setup successfully by the WASOC team, create a new test Canary Token and generate an incident by interacting with it.
-This should generate an alert and send its data to Sentinel via the Logic App we deployed.
-
-<!-- Navigate to your Canary platform's webhook settings and enter the two pieces of information we collected earlier as shown in the image below.
-
-![Screenshot of canary webhook setting](./images/canaryplatform-webhook-settings.png)
+![]()
 
 Field description:
+1. **Subscription**: The subscriptions where the Logic apps will be deployed to.
+2. **Resource Group**: The resource group where the Logic apps will be deployed to.
+3. **Logic App Name**: Name for the Logic App.
+4. **DCR Immutable ID**: DCR Immutable ID from the previously deployed DCR (from the JSON view).
+5. **DCR Log Ingestion**: DCR Log Ingestion URI from the previously deployed DCR (from the JSON view).
 
-1. Paste the URL from the logic app copied in the step 5.
-2. Provide a header name and paste the GUID value copied in step 6.
-3. Save the webhook information.
-
-This completes the integration of your Canary platform with your SIEM environment. -->
-
-<!-- END: Azure Logic App Deployment Guide -->
 
 <br>
 <!-- Empty line for styling -->

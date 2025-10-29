@@ -122,7 +122,43 @@ Once the information has been filled in and the resources are successfully deplo
 
 ### Step 7.
 
-Select the 'Design
+Select the 'Logic app designer' under the 'Development Tools' and select the trigger action as shown below.
+
+![Screenshot of the Logic app designer - trigger action](./images/deployment-guide-screenshots/logic-app-designer-view-trigger.png)
+
+### Step 8.
+
+From the trigger action parameters, copy the HTTP URL for the webhook.
+
+![Screenshot of the HTTP URL - trigger action](./images/deployment-guide-screenshots/logic-app-designer-trigger-http-url.png)
+
+### Step 9.
+
+In a new tab; navigate to the Canary platform and under your flock, and select the settings cogwheel at the top.
+
+![Screenshot of the Canary flock settings](./images/deployment-guide-screenshots/canary-platform-settings-cogwheel.png)
+
+### Step 10. 
+
+Go to 'Notifications' and select the '+' sign under 'Webhooks' to setup a new webhook for the logic apps. And then select 'Add Generic' option to add a generic webhook.
+
+![Screenshot of add webhook - Canary platform](./images/deployment-guide-screenshots/canary-platform-notifications-webhook-add.png)
+
+![Screenshot of the Webhook options - Canary platform](./images/deployment-guide-screenshots/canary-platform-notifications-webhook-options.png)
+
+### Step 11.
+
+1. Paste the HTTP URL that was copied from the Logic App in the step 8 under the 'Webhook URL' text field.
+2. Turn on the 'Add custom request headers' option.
+3. Enter 'key' for the header name.
+4. Copy-paste the key value from the 'Condition' action of Logic App.
+
+![Screenshot of the Generic Webhook values](./images/deployment-guide-screenshots/canary-platform-notifications-webhook-values.png)
+
+Finally, click on 'Save' button at the bottom to add the webhook to the Canary flock.
+
+
+
 
 <br>
 <!-- Empty line for styling -->

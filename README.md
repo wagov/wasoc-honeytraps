@@ -90,8 +90,6 @@ Field description:
 ### Step 3.
 Review and ensure all details provided in the deployment are correct and proceed with creating the resources. Otherwise, select the 'previous' button to go back and make any changes.
 
-![Screenshot of Review and Create page](./images/review-and-create-page-ss.png)
-
 ### Step 4.
 Click on the Data Collection Rule resource that was just deployed and in the overview of the DCR, select JSON View on the top right hand corner. 
 

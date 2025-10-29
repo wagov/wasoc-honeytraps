@@ -96,20 +96,33 @@ Click on the Data Collection Rule resource that was just deployed and in the ove
 
 ![Data Collection Rule overview](./images/deployment-guide-screenshots/dcr-overview.png)
 
-Leave this open on this tab for the time being and proceed to the next step. We will come back to this in a later step.
+Leave this open on this tab and proceed to the next step.
 
 ### Step 5. 
 Now select the 'Deploy to Azure' and open it in a new tab to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace/datalake and fill in the following information.
+
+Copy and paste the information from the JSON view of the DCR in the previous step.
 
 ![Screenshot of the Logic App ARM Template Deployment](./images/deployment-guide-screenshots/logic-app-deployment-arm-template.png)
 
 Field description:
 1. **Subscription**: The subscriptions where the Logic apps will be deployed to.
 2. **Resource Group**: The resource group where the Logic apps will be deployed to.
-3. **Logic App Name**: Name for the Logic App.
+3. **Logic App Name**: The name of the Logic App.
 4. **DCR Immutable ID**: DCR Immutable ID from the previously deployed DCR (from the JSON view).
 5. **DCR Log Ingestion**: DCR Log Ingestion URI from the previously deployed DCR (from the JSON view).
 
+
+### Step 6.
+
+Once the information has been filled in and the resources are successfully deployed, select the deployed logic app resource. (You should see a screen like the one shown below)
+
+![Screenshot of the successful deployment of the Logic App](./images/deployment-guide-screenshots/logic-app-successful-resource-deployment.png)
+
+
+### Step 7.
+
+Select the 'Design
 
 <br>
 <!-- Empty line for styling -->

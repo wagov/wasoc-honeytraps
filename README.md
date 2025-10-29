@@ -157,7 +157,9 @@ Go to 'Notifications' and select the '+' sign under 'Webhooks' to setup a new we
 
 Finally, click on 'Save' button at the bottom to add the webhook to the Canary flock.
 
+---
 
+This completes the integration for the Honey Traps project. You can now create canary tokens and perform testing to ensure the integration is working correctly.
 
 
 <br>

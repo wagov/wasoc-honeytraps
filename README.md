@@ -8,7 +8,7 @@ This repository contains information on the WA Honey Traps Program onboarding pr
 
 2) [Onboarding Checklist](#onboarding-checklist)
 
-3) [Azure Logic App Deployment Guide](#azure-logic-app-deployment-guide)
+3) [Data Collection Rule and Logic App deployment guide](#data-collection-rule-and-logic-app-deployment-guide)
 
 4) [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
 
@@ -31,7 +31,7 @@ This repository contains information on the WA Honey Traps Program onboarding pr
 
 - [ ] Refer to information and instructions provided in [WASOC Honey Trap (Pilot)](https://soc.cyber.wa.gov.au//onboarding/honey-traps/) get onboard to WA Honeytraps Program.
 - [ ] Verify that a Canary group has been provisioned for agency by WA SOC.
-- [ ] Deploy integration webhook logic-apps [Azure Logic App Deployment Guide](#azure-logic-app-deployment-guide)
+- [ ] Complete the integrations for DCR and Logic Apps [Data Collection Rule and Logic App deployment guide](#data-collection-rule-and-logic-app-deployment-guide)
 - [ ] Deploy analytic rules for Microsoft Sentinel [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
 - [ ] Ensure analytic rules and Logic Apps have been enabled
 - [ ] [Initiate end-to-end test to generate alert](#initiating-an-end-to-end-test)
@@ -55,15 +55,17 @@ For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 <!-- BEGINNING: Data Collection Rule and Custom Table creation ARM template deployment guide -->
 <div align="center">
 
-# Data Collection Rule creation and Logic App deployment guide
-The following steps will guide you on utilising Azure ARM templates to create a Data Collection Rule and a custom table for the canary platform data.
+# Data Collection Rule and Logic App deployment guide
+The following steps will guide you on utilising Azure ARM templates to create a Data Collection Rule and Logic App to integrate Honey Traps canary platform with Microsoft Sentinel.
 </div>
 
 
 
 ## Pre-requisites:
-- Requires an Azure Log Analytics Workspace (to ingest the data from Canary platform)
-- A Canary group that has been provisioned by WASOC
+- Requires an Azure Log Analytics Workspace (to ingest the data from the Honey Traps canary platform).
+- A Canary group that has been provisioned by WASOC.
+- Requires Contributor permission to the Microsoft Subscription to deploy the required resources.
+- Requires a minimum of 'User Access Administrator' for role assignment to the target subscription.
 
 ## Step by step guide
 
@@ -81,10 +83,8 @@ Field description:
 1. **Subscription**: The subscriptions where the Data Collection Rules will be deployed to.
 2. **Resource Group**: The resource group where the Data Collection Rules will be deployed to.
 3. **Data Collection Rule Name**: Name for the Data Collection Rule (Note: No special characters or numbers).
-4. **Workspace Resource ID**: The Workspace Resource ID of the log analytics workspace, where the canary/ canary-token logs will be send to.
+4. **Workspace Resource ID**: The Workspace Resource ID of the log analytics workspace. (Microsoft sentinel > Settings > Workspace Settings > Properties > Resource ID)
 5. **Workspace Name**: The name of the Workspace you have selected above.
-
-> Note: Workspace Resource ID can be found under the settings of the workspace in Sentinel.
 
 
 ### Step 3.
@@ -101,21 +101,20 @@ Leave this open on this tab and proceed to the next step.
 ### Step 5. 
 Now select the 'Deploy to Azure' and open it in a new tab to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace/datalake and fill in the following information.
 
-Copy and paste the information from the JSON view of the DCR in the previous step.
-
 ![Screenshot of the Logic App ARM Template Deployment](./images/deployment-guide-screenshots/logic-app-deployment-arm-template.png)
 
 Field description:
 1. **Subscription**: The subscriptions where the Logic apps will be deployed to.
 2. **Resource Group**: The resource group where the Logic apps will be deployed to.
-3. **Logic App Name**: The name of the Logic App.
+3. **Logic App Name**: The name of the Logic App. (Please update the 'AGENCYNAME' to reflect your agency's name)
 4. **DCR Immutable ID**: DCR Immutable ID from the previously deployed DCR (from the JSON view).
 5. **DCR Log Ingestion**: DCR Log Ingestion URI from the previously deployed DCR (from the JSON view).
 
+> **Note: If the DCR resource group and Logic App resource groups are different, you may need to manually assign the Monitoring Metrics Publisher role to the Managed Identity of the Logic App, scoped to the resource group that contains the Data Collection Rule (DCR).**
 
 ### Step 6.
 
-Once the information has been filled in and the resources are successfully deployed, select the deployed logic app resource. (You should see a screen like the one shown below)
+Once the information has been filled in and the resources are successfully deployed, select the deployed logic app resource (You should see a screen like the one shown below).
 
 ![Screenshot of the successful deployment of the Logic App](./images/deployment-guide-screenshots/logic-app-successful-resource-deployment.png)
 
@@ -134,9 +133,9 @@ From the trigger action parameters, copy the HTTP URL for the webhook.
 
 ### Step 9.
 
-In a new tab; navigate to the Canary platform and under your flock, and select the settings cogwheel at the top.
+In a new tab; navigate to the Honey Traps Canary platform and select the settings cogwheel at the top.
 
-![Screenshot of the Canary flock settings](./images/deployment-guide-screenshots/canary-platform-settings-cogwheel.png)
+![Screenshot of the Canary settings](./images/deployment-guide-screenshots/canary-platform-settings-cogwheel.png)
 
 ### Step 10. 
 
@@ -155,7 +154,7 @@ Go to 'Notifications' and select the '+' sign under 'Webhooks' to setup a new we
 
 ![Screenshot of the Generic Webhook values](./images/deployment-guide-screenshots/canary-platform-notifications-webhook-values.png)
 
-Finally, click on 'Save' button at the bottom to add the webhook to the Canary flock.
+Finally, click on 'Save' button at the bottom to add the webhook to the Canary.
 
 ---
 
@@ -184,9 +183,9 @@ The following steps will guide you on deploying analytic-rules to generate alert
 
 ## Prerequisites
 
-- You must have set up [send-canary-alert-webhook](#azure-logic-app-deployment-guide) logic-apps prior to deploying the analytic rules
-- You must have atleast one Canary token incident generated on the Canary platform (Ref: [Step 8](#step-8) of Azure Logic App Deployment Guide)
-- The analytic rule uses the following default table name in your Log Analytics Workspace: **CanaryLogs_CL**
+- You must have completed the [Honey Traps Canary Integration](#data-collection-rule-and-logic-app-deployment-guide) prior to deploying the analytic rules.
+- You must have atleast one Canary token incident generated on the Canary platform.
+- The analytic rule uses the following default table name in your Log Analytics Workspace: **Canary_CL**.
 
 ## Step by step guide
 
@@ -233,11 +232,11 @@ Initiate test to generate incident from the canary platform, and verify that inc
 <!-- END: Analytic Rules Guide -->
 
 ## Initiating an end-to-end test
-To initiate an end-to-end test the integration of the canary platform and the SIEM, you could do the following.
+To initiate an end-to-end test the integration of the Honey Traps canary platform and the SIEM, you could do the following:
 
 ### Pre-requisites
 - You must have a canary group provisioned by WA SOC.
-- You must have completed the [Azure Logic App Deployment](#azure-logic-app-deployment-guide) and have the [Analytic Rules Deployed](#analytic-rules-deployment-guide).
+- You must have completed the [DCR and Logic App deployment](#data-collection-rule-and-logic-app-deployment-guide) and have the [Analytic Rules Deployed](#analytic-rules-deployment-guide).
 
 ### Step 1. 
 Create a new canary token within your canary group.

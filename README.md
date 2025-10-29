@@ -68,14 +68,14 @@ The following steps will guide you on utilising Azure ARM templates to create a 
 ## Step by step guide
 
 ### Step 1. 
-To start the deployment of the logic app to Azure, click on the Deploy to 'Azure button' shown below.
+To start the integration of the Honey Traps platform with your Sentinel SIEM, click on the 'Deploy to Azure' button shown below. This will deploy the Data Collection Rule and Custom tables required.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/)
 
 ### Step 2.
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information.
 
-![Screenshot of the Custom Deployment page](./images/custom-deployment-page-ss.png)
+![Screenshot of the DCR ARM template](./images/deployment-guide-screenshots/dcr-custom-table-deployment-arm-template-marked.png.png)
 
 Field description:
 1. **Subscription**: The subscriptions where the Data Collection Rules will be deployed to.
@@ -90,14 +90,18 @@ Field description:
 ### Step 3.
 Review and ensure all details provided in the deployment are correct and proceed with creating the resources. Otherwise, select the 'previous' button to go back and make any changes.
 
+
 ### Step 4.
 Click on the Data Collection Rule resource that was just deployed and in the overview of the DCR, select JSON View on the top right hand corner. 
 
+![Data Collection Rule overview](./images/deployment-guide-screenshots/dcr-overview.png)
+
+Leave this open on this tab for the time being and proceed to the next step. We will come back to this in a later step.
+
 ### Step 5. 
-Now select the 'Deploy to Azure' to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace and fill in the following information.
+Now select the 'Deploy to Azure' and open it in a new tab to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace/datalake and fill in the following information.
 
-
-![]()
+![Screenshot of the Logic App ARM Template Deployment](./images/deployment-guide-screenshots/logic-app-deployment-arm-template.png)
 
 Field description:
 1. **Subscription**: The subscriptions where the Logic apps will be deployed to.

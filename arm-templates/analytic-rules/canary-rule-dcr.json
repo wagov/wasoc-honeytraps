@@ -32,7 +32,7 @@
                 "description": "A canary (honeypot) alert has been triggered, please refer to organisation playbook to investigate the alert.",
                 "severity": "High",
                 "enabled": true,
-                "query": "let ingestion_delay = 1m; //adjust for ingestion delay\nlet rule_look_back = 5m;\nCanaryLogs_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType_s == \"CanaryIncident\"\n| extend IncidentHash_g_ = replace_string(IncidentHash_g,\"-\",\"\") //standardize to Canary URL structure",
+                "query": "let ingestion_delay = 1m; //adjust for ingestion delay\nlet rule_look_back = 5m;\nCanary_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType == \"CanaryIncident\"\n| extend IncidentHash_ = replace_string(IncidentHash,\"-\",\"\") //standardize to Canary URL structure",
                 "queryFrequency": "PT5M",
                 "queryPeriod": "PT10M",
                 "triggerOperator": "GreaterThan",
@@ -65,13 +65,13 @@
                     "aggregationKind": "AlertPerResult"
                 },
                 "alertDetailsOverride": {
-                    "alertDisplayNameFormat": "[WASOC][CANARY] Canary alert - {{Description_s}} ",
-                    "alertDescriptionFormat": "[concat('{{Intro_s}} \n<br>\n\nCanary Location: {{CanaryLocation_s}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_g_}}')]",
+                    "alertDisplayNameFormat": "[WASOC][CANARY] Canary alert - {{Description}} ",
+                    "alertDescriptionFormat": "[concat('{{Intro}} \n<br>\n\nCanary Location: {{CanaryLocation}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_}}')]",
                     "alertDynamicProperties": []
                 },
                 "customDetails": {
-                    "Type": "AlertType_s",
-                    "SubType": "Description_s"
+                    "Type": "AlertType",
+                    "SubType": "Description"
                 },
                 "entityMappings": [
                     {
@@ -79,11 +79,11 @@
                         "fieldMappings": [
                             {
                                 "identifier": "Address",
-                                "columnName": "CanaryIP_s"
+                                "columnName": "CanaryIP"
                             },
                             {
                                 "identifier": "AddressScope",
-                                "columnName": "CanaryName_s"
+                                "columnName": "CanaryName"
                             }
                         ]
                     },
@@ -101,7 +101,7 @@
                         "fieldMappings": [
                             {
                                 "identifier": "HostName",
-                                "columnName": "CanaryName_s"
+                                "columnName": "CanaryName"
                             }
                         ]
                     }

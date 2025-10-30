@@ -32,7 +32,7 @@
                 "description": "A canary token has been triggered, please refer to organisation playbook to investigate the alert.",
                 "severity": "High",
                 "enabled": true,
-                "query": "let ingestion_delay = 1m;\nlet rule_look_back = 5m;\nCanaryLogs_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType_s == \"CanarytokenIncident\"\n| extend IncidentHash_g_ = replace_string(IncidentHash_g,\"-\",\"\") //standardize to Canary URL structure",
+                "query": "let ingestion_delay = 1m;\nlet rule_look_back = 5m;\nCanary_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType == \"CanarytokenIncident\"\n| extend IncidentHash_ = replace_string(IncidentHash,\"-\",\"\") //standardize to Canary URL structure",
                 "queryFrequency": "PT5M",
                 "queryPeriod": "PT10M",
                 "triggerOperator": "GreaterThan",
@@ -65,13 +65,13 @@
                     "aggregationKind": "AlertPerResult"
                 },
                 "alertDetailsOverride": {
-                    "alertDisplayNameFormat": "[WASOC][CANARY-TOKEN] Canary token alert - {{Description_s}} ",
-                    "alertDescriptionFormat": "[concat('{{Intro_s}} \n<br>\n\nReminder: {{Reminder_s}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_g_}}')]",
+                    "alertDisplayNameFormat": "[WASOC][CANARY-TOKEN] Canary token alert - {{Description}} ",
+                    "alertDescriptionFormat": "[concat('{{Intro}} \n<br>\n\nReminder: {{Reminder}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_}}')]",
                     "alertDynamicProperties": []
                 },
                 "customDetails": {
-                    "Type": "AlertType_s",
-                    "SubType": "Description_s"
+                    "Type": "AlertType",
+                    "SubType": "Description"
                 },
                 "entityMappings": [
                     {
@@ -88,7 +88,7 @@
                         "fieldMappings": [
                             {
                                 "identifier": "Name",
-                                "columnName": "Token_s"
+                                "columnName": "Token"
                             }
                         ]
                     }

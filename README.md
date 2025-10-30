@@ -197,7 +197,7 @@ To start the deployment of the Azure Analytic Rules for each type of canary, cli
 
 | Rule | Deploy |
 |-|-|
-| **Canary - Analytic Rules** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/) | 
+| **Canary - Analytic Rules** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2Fwagov%2Fwasoc%2Dhoneytraps%2Frefs%2Fheads%2Fmain%2Farm%2Dtemplates%2Fanalytic%2Drules%2Fcombined%2Dcanary%2Drules%2Ddcr%2Ejson) | 
 | **Threat Intelligence - Honey Traps - Suspicious Sign-in** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FDinindu%2DWick%2Fwasoc%2Dhoneytraps%2Frefs%2Fheads%2Fmain%2Farm%2Dtemplates%2Ftip%2Danalytic%2Drules%2FWASOC%2DIntelligence%2Da%2Dsuspicious%2Dsign%2Dins%2Dattempts%2Ddetected%2Dfrom%2Dknown%2Dthreat%2Dactor%2Dinfrastructure%2DWASOC%2DHoneyToken%2Ejson) | 
 
 ### Step 2.

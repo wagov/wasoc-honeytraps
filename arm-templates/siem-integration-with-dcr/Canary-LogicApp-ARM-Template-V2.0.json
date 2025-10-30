@@ -1,0 +1,172 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "metadata": {
+        "title": "WASOC Canary Send Alerts to Sentinel with DCR",
+        "description": "This ARM template will deploy the LogicApp that is required for sending data from Canary platform to the Sentinel Log Analytics workspace via the use of Data Collection Rules.",
+        "prerequisites": "This deployment requires you to have created DCR (Data Collection Rules) or deployed DCR via ARM templates."
+    },
+    "parameters": {
+            "logicpAppsName": {
+                "defaultValue": "WASOC-Canary-LogicApp-Send-Alerts-DCR-AGENCYNAME",
+                "type": "string",
+                "metadata": {
+                    "description": "Add agency code-name as suffix" 
+                }
+            },
+            "dcrImmutableId": {
+                "type": "string",
+                "metadata": {
+                    "description": "Data Collection Rule (ImmutableId) from the JSON view"
+                }
+            },
+            "dcrLogIngestion": {
+                "type": "string",
+                "metadata": {
+                    "description": "Data Collection Rule (logsIngestion) Endpoint from the JSON view. Copy the actual values"
+                }
+            },
+            "dcrStream": {
+                "defaultValue": "Custom-Canary",
+                "allowedValues": [
+                    "Custom-Canary"
+                ],
+                "type": "string",
+                "metadata": {
+                    "description": "Default stream name for the Data Collection Rule is Custom-Canary (This value cannot be changed)."
+                }
+            },
+            "uniqueKey": {
+                "defaultValue": "[newGuid()]",
+                "type": "string",
+                "metadata": {
+                    "description": "Generates unique guid key for header request."
+                }
+            },
+            "roleDefinitionId": {
+                "type": "string",
+                "defaultValue": "3913510d-42f4-4e42-8a64-420c390055eb",
+                "allowedValues": [
+                    "3913510d-42f4-4e42-8a64-420c390055eb"
+                ],
+                "metadata": { 
+                    "description": "Role Definition ID for Monitoring Metrics Publisher"
+                }
+            },
+            "location": {
+                "defaultValue": "[resourceGroup().location]",
+                "type": "string",
+                "metadata": {
+                    "description": "Specifies the location in which to create the LogicApps"
+                }
+            }
+        },
+        "variables": {
+            "logicAppId": "[resourceId('Microsoft.Logic/workflows', parameters('logicpAppsName'))]"
+        },
+        "resources": [
+            {
+                "type": "Microsoft.Logic/workflows",
+                "apiVersion": "2019-05-01",
+                "name": "[parameters('logicpAppsName')]",
+                "location": "[parameters('location')]",
+                "tags": {
+                    "Author": "WASOC",
+                    "Version": "2.0.0",
+                    "Project": "HoneyTraps"
+                },
+                "identity": {
+                    "type": "SystemAssigned"
+                },
+                "properties": {
+                    "state": "Enabled",
+                    "definition": {
+                        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                        "contentVersion": "1.0.0.0",
+                        "parameters": {
+                            "$connections": {
+                                "defaultValue": {},
+                                "type": "Object"
+                            }
+                        },
+                        "triggers": {
+                            "manual": {
+                                "type": "Request",
+                                "kind": "Http",
+                                "inputs": {
+                                    "schema": {}
+                                }
+                            }
+                        },
+                        "actions": {
+                            "Condition": {
+                                "actions": {
+                                    "HTTP": {
+                                        "type": "Http",
+                                        "inputs": {
+                                            "uri": "[concat(parameters('dcrLogIngestion'), '/dataCollectionRules/', parameters('dcrImmutableId'), '/streams/', parameters('dcrStream'), '?api-version=2023-01-01')]",
+                                            "method": "POST",
+                                            "body": [
+                                                "@triggerBody()"
+                                            ],
+                                            "authentication": {
+                                                "type": "ManagedServiceIdentity",
+                                                "audience": "https://monitor.azure.com/"
+                                            }
+                                        },
+                                        "runtimeConfiguration": {
+                                            "contentTransfer": {
+                                                "transferMode": "Chunked"
+                                            }
+                                        }
+                                    }
+                                },
+                                "runAfter": {},
+                                "else": {
+                                    "actions": {
+                                        "Terminate": {
+                                            "type": "Terminate",
+                                            "inputs": {
+                                                "runStatus": "Succeeded"
+                                            }
+                                        }
+                                    }
+                                },
+                                "expression": {
+                                    "and": [
+                                        {
+                                            "equals": [
+                                                "@triggerOutputs()?['headers']?['key']",
+                                                "[parameters('uniqueKey')]"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "type": "If"
+                            }
+                        },
+                        "outputs": {}
+                    },
+                    "parameters": {
+                        "$connections": {
+                            "value": {}
+                        }
+                    }
+                }
+            },
+            {
+                "type": "Microsoft.Authorization/roleAssignments",
+                "apiVersion": "2022-04-01",
+                "name": "[guid(resourceGroup().id, parameters('roleDefinitionId'), parameters('logicpAppsName'))]",
+                "dependsOn": [
+                    "[variables('logicAppId')]"
+                ],
+                "properties": {
+                    "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', parameters('roleDefinitionId'))]",
+                    "principalId": "[reference(resourceId('Microsoft.Logic/workflows', parameters('logicpAppsName')), '2019-05-01', 'Full').identity.principalId]",
+                    "principalType": "ServicePrincipal",
+                    "scope": "[resourceGroup().id]"
+                }
+            }
+        ]
+}

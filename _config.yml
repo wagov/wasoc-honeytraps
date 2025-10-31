@@ -7,13 +7,13 @@ nav_enabled: true
 search_enabled: true
 
 search: 
-  search.heading_level: 4
+  heading_level: 4
   previews: 3
   preview_words_before: 5
   preview_words_after: 10
   tokenizer_separator: /[\s/]+/
   rel_url: true
-  button: false
+  button: true
   focus_shortcut_key: 'k'
 
 callouts_level: quiet # or loud

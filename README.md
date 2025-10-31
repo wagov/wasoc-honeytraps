@@ -202,8 +202,6 @@ To start the deployment of the Azure Analytic Rules for each type of canary, cli
 
 ### Step 2.
 
-> Note: Please deploy each analytic rule template one at a time.
-
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information
 
 ![Screenshot of Deployment page](./images/DeploymentPage.png)

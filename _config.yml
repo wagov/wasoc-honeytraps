@@ -1,6 +1,7 @@
 title: Honey Traps Project
 description: This site contains the documentation for the Honey Traps project offered by the WA Security Operations Center.
 url: https://wagov.github.io/wasoc-honeytraps
+
 search_enabled: true
 
 search: 
@@ -13,6 +14,23 @@ search:
   button: false
   focus_shortcut_key: 'k'
 
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
 remote_theme: just-the-docs/just-the-docs
 
-
+footer_content: '**Acknowledgement of Country** \The Government of Western Australia acknowledges the traditional custodians throughout Western Australia and their continuing connection to the land, waters and community. We pay our respects to all members of the Aboriginal communities and their cultures; and to Elders both past and present.'

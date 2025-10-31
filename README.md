@@ -218,8 +218,8 @@ Trigger the canary token by interacting with it.
 ### Step 3. 
 Navigate to your Log Analytics Workspace to check if any alerts have been ingested.
 
-> [!NOTE] 
-> It may take up to 5 minutes for the alerts to be ingested for the first time.
+{: .note }
+It may take up to 5 minutes for the alerts to be ingested for the first time.
 
 If you have alerts being ingested into your Log Analytics Workspace, you have successfully completed your canary platform and SIEM integration. 
 

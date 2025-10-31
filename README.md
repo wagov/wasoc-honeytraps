@@ -21,11 +21,7 @@ This repository contains information on the WA Honey Traps Program onboarding pr
 <!-- ![Overview-HoneyTrapsIntegration](./images/overview-honey-traps-integration.png)) -->
 ## Platform Integration - Overview
 
-<div align="left" class="container">
-
 <img src="images/overview-honey-traps-setup.png" width="900" height="700">
-
-</div>
 
 ## Onboarding Checklist
 
@@ -45,11 +41,9 @@ For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 ---
 
 <!-- BEGINNING: Data Collection Rule and Custom Table creation ARM template deployment guide -->
-<div align="center">
 
 # Data Collection Rule and Logic App deployment guide
 The following steps will guide you on utilising Azure ARM templates to create a Data Collection Rule and Logic App to integrate Honey Traps canary platform with Microsoft Sentinel.
-</div>
 
 
 
@@ -159,13 +153,9 @@ This completes the integration for the Honey Traps project. You can now create c
 ---
 
 <!-- BEGINNING: Analytic Rules Deployment Guide -->
-
-<div align="center">
-
 # Analytic Rules Deployment Guide
 
 The following steps will guide you on deploying analytic-rules to generate alerts and incident in your Microsoft Sentinel workspace.
-</div>
 
 ## Prerequisites
 
@@ -228,7 +218,7 @@ Trigger the canary token by interacting with it.
 ### Step 3. 
 Navigate to your Log Analytics Workspace to check if any alerts have been ingested.
 
-> [!NOTE]
+> [!NOTE] 
 > It may take up to 5 minutes for the alerts to be ingested for the first time.
 
 If you have alerts being ingested into your Log Analytics Workspace, you have successfully completed your canary platform and SIEM integration. 

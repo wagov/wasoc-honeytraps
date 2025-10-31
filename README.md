@@ -98,8 +98,8 @@ Field description:
 4. **DCR Immutable ID**: DCR Immutable ID from the previously deployed DCR (from the JSON view).
 5. **DCR Log Ingestion**: DCR Log Ingestion URI from the previously deployed DCR (from the JSON view).
 
-> [!IMPORTANT]
-> If the DCR resource group and Logic App resource groups are different, you may need to manually assign the Monitoring Metrics Publisher role to the Managed Identity of the Logic App, scoped to the resource group that contains the Data Collection Rule (DCR).
+{: .important }
+If the DCR resource group and Logic App resource groups are different, you may need to manually assign the Monitoring Metrics Publisher role to the Managed Identity of the Logic App, scoped to the resource group that contains the Data Collection Rule (DCR).
 
 ### Step 6.
 
@@ -188,8 +188,8 @@ Field description:
 5. **Rule Id's**: Function value to obtain new Rule Id's for Canary and Canary Tokens.
 6. **Domain**: The domain of the canary platform. e.g. '83ndg2ob.canary.tools'
 
-> [!WARNING]
-> Do not replace or change the value in the 'Rule Id' fields. This is to generate unique Ids for your analytic rules.
+{: .warning }
+Do not replace or change the value in the 'Rule Id' fields. This is to generate unique Ids for your analytic rules.
 
 ### Step 3.
 Review and ensure all details provided in the deployment are correct and proceed with creating the resources. Otherwise, select the 'previous' button to go back and make any changes.

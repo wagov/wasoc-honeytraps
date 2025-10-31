@@ -5,25 +5,32 @@
         "workspaceName": {
             "type": "String"
         },
-	"ruleId": {
+	"ruleId-canary": {
       "type": "string",
       "defaultValue": "[newGuid()]",
       "metadata": {
-        "description": "The unique guid for this Analytics Rule"
+        "description": "The unique guid for canary analytic rule"
+				}
+			},
+	"ruleId-token": {
+      "type": "string",
+      "defaultValue": "[newGuid()]",
+      "metadata": {
+        "description": "The unique guid for canary token analytic rule"
 				}
 			},
     "domain": {
         "type": "string",
         "defaultValue": "<Enter your canary platform domain here>",
         "metadata": {
-            "description": "The domain name for the canary platform, to be provided by WASOC"
+            "description": "The domain from the canary platform. e.g. '83ndg2ob.canary.tools'"
             }
         }
 		},	
     "resources": [
         {
-            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId'))]",
-            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId'))]",
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId-canary'))]",
+            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId-canary'))]",
             "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
             "kind": "Scheduled",
             "apiVersion": "2023-12-01-preview",
@@ -66,7 +73,7 @@
                 },
                 "alertDetailsOverride": {
                     "alertDisplayNameFormat": "[WASOC][CANARY] Canary alert - {{Description}} ",
-                    "alertDescriptionFormat": "[concat('{{Intro}} \n<br>\n\nCanary Location: {{CanaryLocation}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_g_}}')]",
+                    "alertDescriptionFormat": "[concat('{{Intro}} \n<br>\n\nCanary Location: {{CanaryLocation}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_}}')]",
                     "alertDynamicProperties": []
                 },
                 "customDetails": {
@@ -111,8 +118,8 @@
             }
         },
         {
-            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId'))]",
-            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId'))]",
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId-token'))]",
+            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId-token'))]",
             "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
             "kind": "Scheduled",
             "apiVersion": "2023-12-01-preview",

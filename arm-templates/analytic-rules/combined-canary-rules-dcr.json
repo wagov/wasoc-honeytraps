@@ -5,25 +5,32 @@
         "workspaceName": {
             "type": "String"
         },
-	"ruleId": {
+	"ruleId-canary": {
       "type": "string",
       "defaultValue": "[newGuid()]",
       "metadata": {
-        "description": "The unique guid for this Analytics Rule"
+        "description": "The unique guid for canary analytic rule"
+				}
+			},
+	"ruleId-token": {
+      "type": "string",
+      "defaultValue": "[newGuid()]",
+      "metadata": {
+        "description": "The unique guid for canary token analytic rule"
 				}
 			},
     "domain": {
         "type": "string",
         "defaultValue": "<Enter your canary platform domain here>",
         "metadata": {
-            "description": "The domain name for the canary platform, to be provided by WASOC"
+            "description": "The domain from the canary platform. e.g. '83ndg2ob.canary.tools'"
             }
         }
 		},	
     "resources": [
         {
-            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId'))]",
-            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId'))]",
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId-canary'))]",
+            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId-canary'))]",
             "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
             "kind": "Scheduled",
             "apiVersion": "2023-12-01-preview",
@@ -32,7 +39,7 @@
                 "description": "A canary (honeypot) alert has been triggered, please refer to organisation playbook to investigate the alert.",
                 "severity": "High",
                 "enabled": true,
-                "query": "let ingestion_delay = 1m; //adjust for ingestion delay\nlet rule_look_back = 5m;\nCanaryLogs_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType_s == \"CanaryIncident\"\n| extend IncidentHash_g_ = replace_string(IncidentHash_g,\"-\",\"\") //standardize to Canary URL structure",
+                "query": "let ingestion_delay = 1m; //adjust for ingestion delay\nlet rule_look_back = 5m;\nCanary_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType == \"CanaryIncident\"\n| extend IncidentHash_ = replace_string(IncidentHash,\"-\",\"\") //standardize to Canary URL structure",
                 "queryFrequency": "PT5M",
                 "queryPeriod": "PT10M",
                 "triggerOperator": "GreaterThan",
@@ -65,13 +72,13 @@
                     "aggregationKind": "AlertPerResult"
                 },
                 "alertDetailsOverride": {
-                    "alertDisplayNameFormat": "[WASOC][CANARY] Canary alert - {{Description_s}} ",
-                    "alertDescriptionFormat": "[concat('{{Intro_s}} \n<br>\n\nCanary Location: {{CanaryLocation_s}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_g_}}')]",
+                    "alertDisplayNameFormat": "[WASOC][CANARY] Canary alert - {{Description}} ",
+                    "alertDescriptionFormat": "[concat('{{Intro}} \n<br>\n\nCanary Location: {{CanaryLocation}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_}}')]",
                     "alertDynamicProperties": []
                 },
                 "customDetails": {
-                    "Type": "AlertType_s",
-                    "SubType": "Description_s"
+                    "Type": "AlertType",
+                    "SubType": "Description"
                 },
                 "entityMappings": [
                     {
@@ -79,11 +86,11 @@
                         "fieldMappings": [
                             {
                                 "identifier": "Address",
-                                "columnName": "CanaryIP_s"
+                                "columnName": "CanaryIP"
                             },
                             {
                                 "identifier": "AddressScope",
-                                "columnName": "CanaryName_s"
+                                "columnName": "CanaryName"
                             }
                         ]
                     },
@@ -101,7 +108,7 @@
                         "fieldMappings": [
                             {
                                 "identifier": "HostName",
-                                "columnName": "CanaryName_s"
+                                "columnName": "CanaryName"
                             }
                         ]
                     }
@@ -111,8 +118,8 @@
             }
         },
         {
-            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId'))]",
-            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId'))]",
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspaceName'), 'Microsoft.SecurityInsights'),'/alertRules/',parameters('ruleId-token'))]",
+            "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/', parameters('ruleId-token'))]",
             "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
             "kind": "Scheduled",
             "apiVersion": "2023-12-01-preview",
@@ -121,7 +128,7 @@
                 "description": "A canary token has been triggered, please refer to organisation playbook to investigate the alert.",
                 "severity": "High",
                 "enabled": true,
-                "query": "let ingestion_delay = 1m;\nlet rule_look_back = 5m;\nCanaryLogs_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType_s == \"CanarytokenIncident\"\n| extend IncidentHash_g_ = replace_string(IncidentHash_g,\"-\",\"\") //standardize to Canary URL structure",
+                "query": "let ingestion_delay = 1m;\nlet rule_look_back = 5m;\nCanary_CL\n| where TimeGenerated >= ago(ingestion_delay + rule_look_back)\n| where ingestion_time() > ago(rule_look_back)\n| where AlertType == \"CanarytokenIncident\"\n| extend IncidentHash_ = replace_string(IncidentHash,\"-\",\"\") //standardize to Canary URL structure",
                 "queryFrequency": "PT5M",
                 "queryPeriod": "PT10M",
                 "triggerOperator": "GreaterThan",
@@ -154,13 +161,13 @@
                     "aggregationKind": "AlertPerResult"
                 },
                 "alertDetailsOverride": {
-                    "alertDisplayNameFormat": "[WASOC][CANARY-TOKEN] Canary token alert - {{Description_s}} ",
-                    "alertDescriptionFormat": "[concat('{{Intro_s}} \n<br>\n\nReminder: {{Reminder_s}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_g_}}')]",
+                    "alertDisplayNameFormat": "[WASOC][CANARY-TOKEN] Canary token alert - {{Description}} ",
+                    "alertDescriptionFormat": "[concat('{{Intro}} \n<br>\n\nReminder: {{Reminder}} \n<br>\n\nURL: https://',parameters('domain'),'/nest/incident/{{IncidentHash_}}')]",
                     "alertDynamicProperties": []
                 },
                 "customDetails": {
-                    "Type": "AlertType_s",
-                    "SubType": "Description_s"
+                    "Type": "AlertType",
+                    "SubType": "Description"
                 },
                 "entityMappings": [
                     {
@@ -177,7 +184,7 @@
                         "fieldMappings": [
                             {
                                 "identifier": "Name",
-                                "columnName": "Token_s"
+                                "columnName": "Token"
                             }
                         ]
                     }

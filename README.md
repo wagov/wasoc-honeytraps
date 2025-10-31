@@ -72,7 +72,7 @@ The following steps will guide you on utilising Azure ARM templates to create a 
 ### Step 1. 
 To start the integration of the Honey Traps platform with your Sentinel SIEM, click on the 'Deploy to Azure' button shown below. This will deploy the Data Collection Rule and Custom tables required for the integration.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2Fwagov%2Fwasoc%2Dhoneytraps%2Frefs%2Fheads%2Fmain%2Farm%2Dtemplates%2Fsiem%2Dintegration%2Dwith%2Ddcr%2FDCR%2DARM%2DTemplate%2Dv7%2E0%2Ejson)
 
 ### Step 2.
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information.
@@ -99,7 +99,9 @@ Click on the Data Collection Rule resource that was just deployed and in the ove
 Leave this open on this tab and proceed to the next step.
 
 ### Step 5. 
-Now select the 'Deploy to Azure' and open it in a new tab to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace/datalake and fill in the following information.
+Now select the 'Deploy to Azure' below and open it in a new tab to deploy the Logic Apps for sending the Canary data over to the Log Analytic workspace/datalake and fill in the following information.
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2Fwagov%2Fwasoc%2Dhoneytraps%2Frefs%2Fheads%2Fmain%2Farm%2Dtemplates%2Fsiem%2Dintegration%2Dwith%2Ddcr%2FCanary%2DLogicApp%2DARM%2DTemplate%2DV2%2E0%2Ejson)
 
 ![Screenshot of the Logic App ARM Template Deployment](./images/deployment-guide-screenshots/logic-app-deployment-arm-template.png)
 
@@ -195,13 +197,10 @@ To start the deployment of the Azure Analytic Rules for each type of canary, cli
 
 | Rule | Deploy |
 |-|-|
-| **Canary Tokens - Analytic Rules** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcanarytokens-rule.json) | 
-| **Canary - Analytic Rules** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwagov%2Fwasoc-honeytraps%2Frefs%2Fheads%2Fmain%2Farm-templates%2Fanalytic-rules%2Fcanary-rule.json) | 
+| **Canary - Analytic Rules** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2Fwagov%2Fwasoc%2Dhoneytraps%2Frefs%2Fheads%2Fmain%2Farm%2Dtemplates%2Fanalytic%2Drules%2Fcombined%2Dcanary%2Drules%2Ddcr%2Ejson) | 
 | **Threat Intelligence - Honey Traps - Suspicious Sign-in** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FDinindu%2DWick%2Fwasoc%2Dhoneytraps%2Frefs%2Fheads%2Fmain%2Farm%2Dtemplates%2Ftip%2Danalytic%2Drules%2FWASOC%2DIntelligence%2Da%2Dsuspicious%2Dsign%2Dins%2Dattempts%2Ddetected%2Dfrom%2Dknown%2Dthreat%2Dactor%2Dinfrastructure%2DWASOC%2DHoneyToken%2Ejson) | 
 
 ### Step 2.
-
-> Note: Please deploy each analytic rule template one at a time.
 
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information
 

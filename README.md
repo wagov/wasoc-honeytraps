@@ -39,14 +39,6 @@ This repository contains information on the WA Honey Traps Program onboarding pr
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 
-<br>
-<!-- Empty line for styling -->
-</br>
-
-<br>
-<!-- Empty line for styling -->
-</br>
-
 
 <!-- END: Intro -->
 
@@ -163,15 +155,6 @@ Finally, click on 'Save' button at the bottom to add the webhook to the Canary.
 This completes the integration for the Honey Traps project. You can now create canary tokens and perform testing to ensure the integration is working correctly.
 
 
-<br>
-<!-- Empty line for styling -->
-</br>
-
-
-<br>
-<!-- Empty line for styling -->
-</br>
-
 ---
 
 <!-- BEGINNING: Analytic Rules Deployment Guide -->
@@ -226,9 +209,6 @@ Navigate to _Analytics_ blade inside the Microsoft Sentinel, and verify that the
 Initiate test to generate incident from the canary platform, and verify that incidents were generated in Microsoft Sentinel.
 <!-- END: Analytic Rules Guide -->
 
-<br>
-<!-- Empty line for styling -->
-</br>
 
 ## Initiating an end-to-end test
 To initiate an end-to-end test the integration of the Honey Traps canary platform and the SIEM, you could do the following:
@@ -250,19 +230,8 @@ Navigate to your Log Analytics Workspace to check if any alerts have been ingest
 
 If you have alerts being ingested into your Log Analytics Workspace, you have successfully completed your canary platform and SIEM integration. 
 
-<br>
-<!-- Empty line for styling -->
-</br>
 
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au
 
 
-<br>
-<!-- Empty line for styling -->
-</br>
-
-
-<br>
-<!-- Empty line for styling -->
-</br>

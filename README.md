@@ -151,8 +151,8 @@ Go to 'Notifications' and select the '+' sign under 'Webhooks' to setup a new we
 
 1. Paste the HTTP URL that was copied from the Logic App in the step 8 under the 'Webhook URL' text field.
 2. Turn on the 'Add custom request headers' option.
-3. Enter 'key' for the header name.
-4. Copy-paste the key value from the 'Condition' action of Logic App.
+3. Enter ***'key'*** for the header name.
+4. Copy-paste the key value from the 'Condition' action of Logic App. (Note: you have to go back to the ***Logic App*** and copy the ***guid*** value)
 
 ![Screenshot of the Generic Webhook values](./images/deployment-guide-screenshots/canary-platform-notifications-webhook-values.png)
 
@@ -204,31 +204,31 @@ To start the deployment of the Azure Analytic Rules for each type of canary, cli
 
 You will be redirected to the custom deployment screen in azure portal. Select/ fill-in the required information
 
-![Screenshot of Deployment page](./images/DeploymentPage.png)
+![Screenshot of Deployment page](./images/deployment-guide-screenshots/analytic-rule-combined-deployment.png)
 
 Field description:
-1. **Subscription**: The subscriptions where the Sentinel workspace is located
-2. **Resource Group**: The resource group where the Sentinel workspace is located
-3. **Region**: The region where the Sentinel workspace is located
-4. **Workspace Name**: The _workspaceName_ of Sentinel log analytics workspace, where the analytic rule will be deployed to
-5. **Rule Id**: Value to obtain a new Rule Id using the newGuid function in Azure
-6. **Domain**: The domain name for the canary platform, to be provided by WASOC.
+1. **Subscription**: The subscriptions where the Sentinel workspace is located.
+2. **Resource Group**: The resource group where the Sentinel workspace is located.
+3. **Region**: The region where the Sentinel workspace is located.
+4. **Workspace Name**: The _workspaceName_ of Sentinel log analytics workspace, where the analytic rule will be deployed to.
+5. **Rule Id's**: Function value to obtain new Rule Id's for Canary and Canary Tokens.
+6. **Domain**: The domain of the canary platform. e.g. '83ndg2ob.canary.tools'
 
-> Note: Do not replace or change the value in the 'Rule Id' field, this is to generate unique Id for your analytic rules.
+> **Note: Do not replace or change the value in the 'Rule Id' fields. This is to generate unique Ids for your analytic rules.**
 
 ### Step 3.
 Review and ensure all details provided in the deployment are correct and proceed with creating the resources. Otherwise, select the 'previous' button to go back and make any changes.
 
-![image](https://github.com/user-attachments/assets/d0426b4d-d76a-4668-8a5e-d20fc0a58a52)
-
 ### Step 4.
 Navigate to _Analytics_ blade inside the Microsoft Sentinel, and verify that the analytics rules has been created and enabled.
-
-![image](https://github.com/user-attachments/assets/642fef4b-409d-473b-b074-fa80c02afa3a)
 
 ### Step 5.
 Initiate test to generate incident from the canary platform, and verify that incidents were generated in Microsoft Sentinel.
 <!-- END: Analytic Rules Guide -->
+
+<br>
+<!-- Empty line for styling -->
+</br>
 
 ## Initiating an end-to-end test
 To initiate an end-to-end test the integration of the Honey Traps canary platform and the SIEM, you could do the following:
@@ -245,9 +245,14 @@ Trigger the canary token by interacting with it.
 
 ### Step 3. 
 Navigate to your Log Analytics Workspace to check if any alerts have been ingested.
-> It may take up to 5 minutes for the alerts to ingest
+
+> **It may take up to 5 minutes for the alerts to be ingested for the first time.**
 
 If you have alerts being ingested into your Log Analytics Workspace, you have successfully completed your canary platform and SIEM integration. 
+
+<br>
+<!-- Empty line for styling -->
+</br>
 
 ## Feedback
 For questions or feedback, please contact cybersecurity@dpc.wa.gov.au

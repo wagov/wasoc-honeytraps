@@ -19,10 +19,10 @@ search:
 callouts_level: quiet # or loud
 callouts:
   highlight:
-    color: yellow
+    color: blue
   important:
     title: Important
-    color: orange
+    color: yellow
   new:
     title: New
     color: green

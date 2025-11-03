@@ -5,18 +5,18 @@ layout: default
 nav_enabled: true
 
 remote_theme: just-the-docs/just-the-docs
-just_the_docs:
-  search_enabled: true
 
-  search: 
-    heading_level: 4
-    previews: 3
-    preview_words_before: 5
-    preview_words_after: 10
-    tokenizer_separator: /[\s/]+/
-    rel_url: true
-    button: true
-    focus_shortcut_key: 'k'
+search_enabled: true
+
+search: 
+  heading_level: 4
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: true
+  focus_shortcut_key: 'k'
 
 callouts_level: quiet # or loud
 callouts:

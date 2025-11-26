@@ -37,7 +37,7 @@ def all_tenant_devices_info(tenants_summary_dict:dict, return_values:str="defaul
     return devices_arr
   else:
     return tenant_device_info
-
+  
 
 # Token info of each tenancy
 def all_tenant_tokens_info(tenants_summary_dict:dict, return_values:str = "default") -> dict:
@@ -48,6 +48,7 @@ def all_tenant_tokens_info(tenants_summary_dict:dict, return_values:str = "defau
   disabled_tokens = 0
   enabled_tokens = 0
   total_tokens = 0
+  webhooks = []
 
   # Go through the tenants summary dictionary and assign the values to their relevant variables
   for tenant, tenant_details in tenants_summary_dict["flocks_summary"].items():
@@ -55,9 +56,10 @@ def all_tenant_tokens_info(tenants_summary_dict:dict, return_values:str = "defau
     disabled_tokens = tenant_details["disabled_tokens"]
     enabled_tokens = tenant_details["enabled_tokens"]
     total_tokens = tenant_details["total_tokens"]
+    webhooks = tenant_details["settings"]["webhooks"]["generic_webhooks"]
 
-    tenant_token_info[tenant] = {'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens} # Store in dictionary for export
-    tokens_arr.append({'Flock-ID': tenant, 'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens}) # Store in array for export
+    tenant_token_info[tenant] = {'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens, 'Webhooks': webhooks} # Store in dictionary for export
+    tokens_arr.append({'Flock-ID': tenant, 'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens, 'Webhooks': webhooks}) # Store in array for export
   
   if return_values == "array":
     # Return token info as an array
@@ -78,6 +80,7 @@ def all_tenant_token_device_info(tenants_summary_dict:dict, return_values:str = 
   devices_offline = 0
   devices_online = 0
   total_devices = 0
+  webhooks = []
 
   # Go through the tenants summary dictionary and assign the values to their relevant variables
   for tenant, tenant_details in tenants_summary_dict["flocks_summary"].items():
@@ -87,12 +90,14 @@ def all_tenant_token_device_info(tenants_summary_dict:dict, return_values:str = 
     total_tokens = tenant_details["total_tokens"]
     devices_offline = tenant_details["offline_devices"]
     devices_online = tenant_details["online_devices"]
+    webhooks = tenant_details["settings"]["webhooks"]["generic_webhooks"]
+
     total_devices = devices_online + devices_offline
 
     # Store info in a dictionary for export
-    tenant_token_device_info[tenant] = {'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens, 'Devices-Online': devices_online, 'Devices-Offline': devices_offline, 'Total-Devices': total_devices} 
+    tenant_token_device_info[tenant] = {'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens, 'Devices-Online': devices_online, 'Devices-Offline': devices_offline, 'Total-Devices': total_devices, "Webhooks": webhooks} 
     # Store info in an array for export
-    tenant_token_device_info_arr.append({'Flock-ID': tenant, 'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens, 'Devices-Online': devices_online, 'Devices-Offline': devices_offline, 'Total-Devices': total_devices}) 
+    tenant_token_device_info_arr.append({'Flock-ID': tenant, 'Tenant-Name': tenant_name, 'Enabled-Tokens': enabled_tokens, 'Disabled-Tokens':disabled_tokens, 'Total-Tokens':total_tokens, 'Devices-Online': devices_online, 'Devices-Offline': devices_offline, 'Total-Devices': total_devices, "Webhooks": webhooks}) 
   
   if return_values == "array":
     # Return token info as an array
@@ -114,7 +119,6 @@ def all_tenants_summary(return_value:str="default") -> dict:
   response = requests.get(url, params=payload)
   
   tenants_summary_dict = response.json()
-
   tenant_id_list = [] # Init list for a list of tenant IDs
 
   # Make a list of tenants (tenant id and name)
@@ -145,4 +149,3 @@ def send_data_la(data:dict) -> None:
 
 if __name__ == '__main__':
   send_data_la(all_tenant_token_device_info(all_tenants_summary(),"array"))
-

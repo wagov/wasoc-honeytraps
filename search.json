@@ -1,0 +1,23 @@
+---
+layout: null
+permalink: /search.json
+nav_exclude: true
+search_exclude: true
+---
+{% assign documents = site.pages | concat: site.documents %}
+{% assign separator = "" %}
+[
+  {% for document in documents %}
+    {% assign extension = document.url | split: "." | last %}
+    {% if document.search_exclude != true and document.title and document.url %}
+      {% if extension == "html" or extension == document.url %}
+        {{ separator }}{
+          "title": {{ document.title | jsonify }},
+          "url": {{ document.url | relative_url | jsonify }},
+          "content": {{ document.content | markdownify | strip_html | normalize_whitespace | jsonify }}
+        }
+        {% assign separator = "," %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+]

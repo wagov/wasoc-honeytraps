@@ -1,3 +1,11 @@
+---
+layout: default
+title: WA HoneyTraps Program
+nav_order: 1
+permalink: /
+last_modified_date: 31-Oct-2026
+---
+
 <!-- BEGINNING: Intro -->
 # WA HoneyTraps Program
 This repository contains information on the WA Honey Traps Program onboarding process and a technical onboarding guide to assist with the technical integration of the Honey Trap platform.

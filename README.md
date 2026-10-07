@@ -7,7 +7,7 @@ last_modified_date: 31-Oct-2026
 ---
 
 <!-- BEGINNING: Intro -->
-# WA HoneyTraps Program
+# WA Honey Traps Program
 This repository contains information on the WA Honey Traps Program onboarding process and a technical onboarding guide to assist with the technical integration of the Honey Trap platform.
 
 ## Table of Contents
@@ -33,7 +33,7 @@ This repository contains information on the WA Honey Traps Program onboarding pr
 
 ## Onboarding Checklist
 
-- [ ] Refer to information and instructions provided in [WASOC Honey Trap (Pilot)](https://soc.cyber.wa.gov.au//onboarding/honey-traps/) get onboard to WA Honeytraps Program.
+- [ ] Refer to information and instructions provided in [WASOC Honey Trap](https://soc.cyber.wa.gov.au//onboarding/honey-traps/) get onboard to WA Honey Traps Program.
 - [ ] Verify that a Canary group has been provisioned for agency by WA SOC.
 - [ ] Complete the integrations for DCR and Logic Apps [Data Collection Rule and Logic App deployment guide](#data-collection-rule-and-logic-app-deployment-guide)
 - [ ] Deploy analytic rules for Microsoft Sentinel [Analytic Rules Deployment Guide](#analytic-rules-deployment-guide)
@@ -165,7 +165,7 @@ This completes the integration for the Honey Traps project. You can now create c
 
 The following steps will guide you on deploying analytic-rules to generate alerts and incident in your Microsoft Sentinel workspace.
 
-## Prerequisites
+## Pre-requisites
 
 - You must have completed the [Honey Traps Canary Integration](#data-collection-rule-and-logic-app-deployment-guide) prior to deploying the analytic rules.
 - You must have atleast one Canary token incident generated on the Canary platform.
